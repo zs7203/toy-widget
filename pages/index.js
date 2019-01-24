@@ -11,7 +11,7 @@ import {
   decay
 } from "popmotion"
 
-import { Center } from "../src/components/Tool"
+import { Center } from "../src/components/Tools"
 import Blick from "../src/components/Blick"
 
 const Ball = styled.div`

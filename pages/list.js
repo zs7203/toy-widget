@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Center } from "../src/components/Tool"
+import { Center } from "../src/components/Tools"
 import List from "../src/components/List"
 
 export default () => (
