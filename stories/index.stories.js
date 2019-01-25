@@ -11,7 +11,7 @@ storiesOf("Welcome", module).add("intro", () => (
     <h1>Weclome to my toy-widget repo!</h1>
     <p>
       A place to collect all my animating widgets, implemented with <b>React,
-      styled-components & react-pose</b>.
+      styled-components, react-pose, animejs</b>.
     </p>
     <i>Small code snippets really, but good enough to try something new and fun 😀 😎 👍 💯.</i>
   </main>
