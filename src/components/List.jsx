@@ -63,8 +63,7 @@ const Item = styled(Li)`
 export default () => {
   const [open, setOpen] = useState(false)
   useEffect(() => {
-    let pid = setTimeout(() => setOpen(!open), 1000)
-    return () => clearTimeout(pid)
+    setTimeout(() => setOpen(!open), 1000)
   })
   return (
     <Sidebar pose={open ? "open" : "closed"}>

@@ -50,8 +50,8 @@ export default () => {
       <PoseGroup>
         {isVisible && [
           // If animating more than one child, each needs a `key`
-          <PosedShade key="shade" className="shade" />,
-          <PosedModal key="modal" className="modal" />
+          <PosedShade key="shade" />,
+          <PosedModal key="modal" />
         ]}
       </PoseGroup>
     )
