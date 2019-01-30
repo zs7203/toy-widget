@@ -1,10 +1,10 @@
 import React from "react"
 
-import { Center } from "../src/components/Tools"
-import List from "../src/components/List"
+import { Centered } from "../src/components/Tools"
+import List from "../src/components/popmotion/List"
 
 export default () => (
-  <Center>
+  <Centered>
     <List />
-  </Center>
+  </Centered>
 )

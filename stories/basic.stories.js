@@ -1,11 +1,18 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 
-import { Center } from "../src/components/Tools"
-import Blick from "../src/components/Blick"
+import { Centered } from "../src/components/Tools"
+import Blink from "../src/components/popmotion/Blick"
+import Rotate from "../src/components/popmotion/Keyframes"
 
-storiesOf("simple effects", module).add("blink", () => (
-  <Center>
-    <Blick />
-  </Center>
-))
+storiesOf("simple effects", module)
+  .add("blink", () => (
+    <Centered>
+      <Blink />
+    </Centered>
+  ))
+  .add("rotate", () => (
+    <Centered>
+      <Rotate />
+    </Centered>
+  ))

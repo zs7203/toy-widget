@@ -11,8 +11,8 @@ import {
   decay
 } from "popmotion"
 
-import { Center } from "../src/components/Tools"
-import Blick from "../src/components/Blick"
+import { Centered } from "../src/components/Tools"
+import Blick from "../src/components/popmotion/Blick"
 
 const Ball = styled.div`
   width: 100px;
@@ -39,10 +39,10 @@ export default () => {
     })
   })
   return (
-    <Center>
+    <Centered>
       <div>
         <Ball ref={ref} />
       </div>
-    </Center>
+    </Centered>
   )
 }

@@ -1,19 +1,23 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 
-import { Center } from "../src/components/Tools"
-import List from "../src/components/List"
-import Modal from "../src/components/Modal"
+import { Centered } from "../src/components/Tools"
+import List from "../src/components/popmotion/List"
+import Modal from "../src/components/popmotion/Modal"
+import ReversingEasingCurve from "../src/components/popmotion/ReversingEasingCurve"
 
 storiesOf("animating widgets", module)
-  //   .addDecorator(story => <Center>{story}</Center>)
+  //   .addDecorator(story => <Centered>{story}</Centered>)
   .add("swiping list", () => (
-    <Center>
+    <Centered>
       <List />
-    </Center>
+    </Centered>
   ))
   .add("Modal", () => (
-    <Center>
+    <Centered>
       <Modal />
-    </Center>
+    </Centered>
+  ))
+  .add("ReversingEasingCurve", () => (
+      <ReversingEasingCurve />
   ))

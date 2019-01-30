@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
-const Center = styled.div`
+const Centered = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,5 +11,5 @@ const Center = styled.div`
 `
 
 export {
-    Center,
+    Centered,
 }
