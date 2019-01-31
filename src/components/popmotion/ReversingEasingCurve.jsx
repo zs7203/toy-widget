@@ -1,3 +1,5 @@
+// https://css-tricks.com/reversing-an-easing-curve/
+
 import React, { useRef, useEffect, useState } from "react"
 import styled, { createGlobalStyle, css } from "styled-components"
 import anime from "animejs"
@@ -27,7 +29,7 @@ ul {
 
 const Wrapper = styled.div`
   height: 100vh;
-  min-height: 600px;
+  /* min-height: 600px; */
   margin: 20px auto;
   display: flex;
   align-items: center;
@@ -99,7 +101,7 @@ const SlideItem = styled.li`
   padding: 40px 65px;
   text-align: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: column nowrap;
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -114,7 +116,7 @@ const SlideItem = styled.li`
 const slideContentStyle = css`
   opacity: 0;
   animation-timing-function: var(--originalCurve);
-  width: calc(100% - 120px);
+  /* width: calc(100% - 120px); */
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -145,42 +147,7 @@ const Carousel = styled.div`
   position: relative;
 `
 
-const data = [
-  {
-    heading: "Testimonial 1",
-    quote: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Porttitor rhoncus dolor purus non enim praesent elementum facilisis.
-    In est ante in nibh mauris cursus mattis molestie.`,
-    cite: "AN Author"
-  },
-  {
-    heading: "Testimonial 2",
-    quote: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Porttitor rhoncus dolor purus non enim praesent elementum facilisis.
-    In est ante in nibh mauris cursus mattis molestie.`,
-    cite: "AN Author"
-  },
-  {
-    heading: "Testimonial 3",
-    quote: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Porttitor rhoncus dolor purus non enim praesent elementum facilisis.
-    In est ante in nibh mauris cursus mattis molestie.`,
-    cite: "AN Author"
-  },
-  {
-    heading: "Testimonial 4",
-    quote: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Porttitor rhoncus dolor purus non enim praesent elementum facilisis.
-    In est ante in nibh mauris cursus mattis molestie.`,
-    cite: "AN Author"
-  }
-]
-
-export default () => {
+export default ({slides}) => {
   const DIRECTION = { INIT: 0, LEFT: 1, RIGHT: 2 }
   const [current, setCurrent] = useState(0)
   const [pre, setPre] = useState(0)
@@ -194,21 +161,21 @@ export default () => {
   const animeIn = (item, direction) => {
     return anime({
       targets: item,
-      translateX: [`${direction === DIRECTION.LEFT ? "-" : ""}50%`, 0],
+      translateX: [`${direction === DIRECTION.LEFT ? "-" : ""}80%`, 0],
       opacity: [0, 1],
       duration: 400,
       easing: slideInCurve,
-      delay: anime.stagger([300, 420, 540])
+      delay: anime.stagger([100, 420, 540])
     })
   }
   const animeOut = (item, direction) => {
     return anime({
       targets: item,
-      translateX: [0, `${direction === DIRECTION.LEFT ? "" : "-"}50%`],
+      translateX: [0, `${direction === DIRECTION.LEFT ? "" : "-"}80%`],
       opacity: [1, 0],
       duration: 400,
       easing: slideOutCurve,
-      delay: anime.stagger([300, 420, 540])
+      delay: anime.stagger([100, 420, 540])
     })
   }
 
@@ -222,10 +189,10 @@ export default () => {
     }
     const direction =
       current - pre > 0
-        ? pre === 0 && current === data.length - 1
+        ? pre === 0 && current === slides.length - 1
           ? DIRECTION.LEFT
           : DIRECTION.RIGHT
-        : current === 0 && pre === data.length - 1
+        : current === 0 && pre === slides.length - 1
         ? DIRECTION.RIGHT
         : DIRECTION.LEFT
     console.log({ direction, current, pre })
@@ -244,7 +211,7 @@ export default () => {
       <Wrapper>
         <Carousel>
           <SlideList ref={$slide}>
-            {data.map((li, i) => (
+            {slides.map((li, i) => (
               <SlideItem key={li.heading}>
                 <SlideHeading className={"stagger"}>{li.heading}</SlideHeading>
                 <blockquote>
@@ -257,7 +224,7 @@ export default () => {
           <Button
             onClick={() => (
                 setPre(current),
-                setCurrent(current + 1 > data.length - 1 ? 0 : current + 1)
+                setCurrent(current + 1 > slides.length - 1 ? 0 : current + 1)
               )}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.9 50.2">
@@ -268,7 +235,7 @@ export default () => {
             next
             onClick={() => (
                 setPre(current),
-                setCurrent(current - 1 < 0 ? data.length - 1 : current - 1)
+                setCurrent(current - 1 < 0 ? slides.length - 1 : current - 1)
               )}
             
           >
