@@ -10,7 +10,6 @@ const SloganContainer = styled.div`
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
   text-align: center;
-  opacity: 0;
   margin: 0 auto;
   color: #fff;
   font-size: 28px;
@@ -184,7 +183,7 @@ const Action = () => {
 }
 
 const Panel = styled.div`
-  position: absolute;
+  opacity: 0;
   width: 558px;
   text-align: center;
   display: inline-flex;
@@ -193,7 +192,8 @@ const Panel = styled.div`
   align-items: center;
 `
 
-const SloganPanel = () => {
+const SloganPanel = ({ className }) => {
+  const $slogan = useRef(null)
   const $smallLetters = useRef(null)
   const $largeLetters = useRef(null)
   const $btns = useRef(null)
@@ -201,6 +201,11 @@ const SloganPanel = () => {
     anime
       .timeline({
         easing: "easeOutQuart"
+      })
+      .add({
+        targets: $slogan.current,
+        opacity: 1,
+        duration: 50
       })
       .add(
         {
@@ -222,14 +227,18 @@ const SloganPanel = () => {
         {
           targets: $btns.current,
           opacity: [0, 1],
-          translateY: [30, 0],
-          easing: "easeOutQuart"
+          translateY: [30, 0]
         },
         2500
       )
-  })
+      .add({
+        targets: $slogan.current,
+        translateX: 530,
+        duration: 1000
+      })
+  }, [])
   return (
-    <Panel>
+    <Panel className={className} ref={$slogan}>
       {/* 魅族16旗舰手机 */}
       <LetterBoxList ref={$smallLetters}>
         {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
@@ -249,7 +258,9 @@ const SloganPanel = () => {
       {/* Action按钮 */}
       <ButtonGroup ref={$btns} style={{ marginTop: 135 }}>
         {btns.map(btn => (
-          <Button href={btn.href}>{btn.name}</Button>
+          <Button href={btn.href} key={btn.name}>
+            {btn.name}
+          </Button>
         ))}
       </ButtonGroup>
     </Panel>
@@ -262,5 +273,5 @@ export {
   LargeLetterBoxDemo,
   LargeLetterListDemo,
   Action,
-  SloganPanel
+  SloganPanel as default
 }

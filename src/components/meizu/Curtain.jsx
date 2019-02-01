@@ -9,6 +9,7 @@ const CurtainWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 10002;
+  background-color: #000;
 `
 const HalfCurtain = styled.div`
   position: fixed;
@@ -44,34 +45,42 @@ const Curtain = () => {
   const $curtain = useRef(null)
 
   useEffect(() => {
-    let progressAnim = anime
+    anime
       .timeline({
         targets: $progress.current
       })
       .add({
         width: "100%",
-        easing: "linear"
+        easing: "easeInQuad",
+        duration: 1000
       })
       .add({
         opacity: "0",
         easing: "linear",
         duration: 200
       })
-    progressAnim.finished.then(() => {
-      $progress.current.style.visibility = "hidden"
-      anime({
-        targets: $upper.current,
-        translateY: "-100%",
+      .add({
+        targets: [$upper.current, $lower.current],
+        translateY: function(el, i) {
+          return i === 0 ? "-100%" : "100%"
+        },
         easing: "easeInQuad"
       })
-       anime({
-        targets: $lower.current,
-        translateY: "100%",
-        easing: "easeInQuad",
-        complete: () => ($curtain.current.style.display = "none")
+      .add({
+        targets: $curtain.current,
+        backgroundColor: "#152632",
+        easing: "linear",
+        duration: 300,
+        delay: 200,
+        endDelay: 3000
       })
-    })
-  })
+      .add({
+        targets: $curtain.current,
+        opacity: 0,
+        duration: 2000
+      })
+  }, [])
+
   return (
     <CurtainWrapper ref={$curtain}>
       <UpperCurtain ref={$upper} />
@@ -88,17 +97,8 @@ const Demo = styled.div`
 `
 
 const CurtainDemo = () => {
-  const $background = useRef(null)
-  useEffect(() =>
-    anime({
-      targets: $background.current,
-      backgroundColor: "#152632",
-      delay: 2500
-    })
-  )
-
   return (
-    <Demo ref={$background}>
+    <Demo>
       <Curtain />
     </Demo>
   )

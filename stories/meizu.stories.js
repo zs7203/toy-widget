@@ -3,16 +3,16 @@ import { storiesOf } from "@storybook/react"
 import { createGlobalStyle } from "styled-components"
 
 import { CurtainDemo } from "../src/components/meizu/Curtain"
-import {
-  SmallLetterBox,
+import SloganPanel, {
   SmallLetterBoxDemo,
   SmallLetterListDemo,
   LargeLetterBoxDemo,
   LargeLetterListDemo,
-  Action,
-  SloganPanel
+  Action
 } from "../src/components/meizu/Slogan"
 import { Centered } from "../src/components/Tools"
+import Phone from "../src/components/meizu/Phone"
+import IntroPanel from "../src/components/meizu/IntroPanel"
 
 const Background = createGlobalStyle`
   body{
@@ -25,6 +25,7 @@ const Background = createGlobalStyle`
 `
 
 storiesOf("Meizu", module)
+  .add("Background Image", () => <PhoneDemo />)
   .addDecorator(story => (
     <Centered
       style={{
@@ -44,4 +45,12 @@ storiesOf("Meizu", module)
   .add("widget - Small Letter List", () => <SmallLetterListDemo />)
   .add("widget - Large Letter List", () => <LargeLetterListDemo />)
   .add("widget - Action", () => <Action />)
+  .add("widget - Phone", () => <Phone />)
   .add("module - Slogan Panel", () => <SloganPanel />)
+
+storiesOf("Meizu", module).add("module - ALL", () => (
+  <>
+    <Background />
+    <IntroPanel />
+  </>
+))
