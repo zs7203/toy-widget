@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react"
-import styled, { createGlobalStyle, css } from "styled-components"
+import React, { useRef, useEffect } from "react"
+import styled from "styled-components"
 import anime from "animejs"
 
 const Phone = styled.div`
@@ -10,15 +10,17 @@ const Phone = styled.div`
   transform: scale(1.1);
 `
 
-export default ({className}) => {
+export default ({ className }) => {
   const $phone = useRef(null)
   useEffect(() => {
     anime({
       targets: $phone.current,
+      opacity: [0, 1],
       scale: [1.1, 1],
       easing: "easeInQuad",
-      duration: 500
+      delay: 500,
+      duration: 100
     })
   }, [])
-  return <Phone ref={$phone} className={className}/>
+  return <Phone ref={$phone} className={className} />
 }

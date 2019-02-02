@@ -1,19 +1,6 @@
-import React, { useRef, useEffect, useState } from "react"
-import styled, { createGlobalStyle, css } from "styled-components"
+import React, { useRef, useEffect } from "react"
+import styled from "styled-components"
 import anime from "animejs"
-
-const SloganContainer = styled.div`
-  position: absolute;
-  left: 604px;
-  width: 558px;
-  padding-top: 330px;
-  -ms-transform: translateX(-100%);
-  transform: translateX(-100%);
-  text-align: center;
-  margin: 0 auto;
-  color: #fff;
-  font-size: 28px;
-`
 
 const Letter = styled.span`
   display: block;
@@ -117,8 +104,8 @@ const LargeLetterListDemo = () => {
   })
   return (
     <LetterBoxList ref={$list}>
-      {[0, 1, 2, 3, 4].map(i => (
-        <LetterBox key={i}>
+      {[0, -7, -9, 7, -10].map((l, i) => (
+        <LetterBox style={{ marginLeft: l }} key={i}>
           <LargeLetter index={i} />
         </LetterBox>
       ))}
@@ -163,6 +150,7 @@ const btns = [
     href: "https://www.meizu.com/16/summary/"
   }
 ]
+
 const Action = () => {
   const $btns = useRef(null)
   useEffect(() => {
@@ -192,7 +180,7 @@ const Panel = styled.div`
   align-items: center;
 `
 
-const SloganPanel = ({ className }) => {
+const SloganPanel = ({ className, onShift }) => {
   const $slogan = useRef(null)
   const $smallLetters = useRef(null)
   const $largeLetters = useRef(null)
@@ -234,7 +222,8 @@ const SloganPanel = ({ className }) => {
       .add({
         targets: $slogan.current,
         translateX: 530,
-        duration: 1000
+        duration: 1000,
+        begin: () => onShift(true)
       })
   }, [])
   return (
@@ -249,8 +238,8 @@ const SloganPanel = ({ className }) => {
       </LetterBoxList>
       {/* 追求源于热爱 */}
       <LetterBoxList ref={$largeLetters}>
-        {[0, 1, 2, 3, 4].map(i => (
-          <LetterBox key={i}>
+        {[0, -7, -9, 7, -10].map((l, i) => (
+          <LetterBox style={{ marginLeft: l }} key={i}>
             <LargeLetter index={i} />
           </LetterBox>
         ))}

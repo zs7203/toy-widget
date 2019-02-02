@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react"
-import styled, { createGlobalStyle, css } from "styled-components"
+import React, { useState } from "react"
+import styled from "styled-components"
 
 import Curtain from "./Curtain"
 import Slogan from "./Slogan"
@@ -14,7 +14,8 @@ const PositionedSlogan = styled(Slogan)`
 const PositionedPhone = styled(Phone)`
   position: absolute;
   top: 180px;
-  left: 110px;
+  opacity: 0;
+  transform: translateX(110px);
 `
 
 const BackImage = styled.div`
@@ -49,17 +50,12 @@ export default () => {
   let [slogan, setSlogan] = useState(false)
   let [phone, setPhone] = useState(false)
 
-  useEffect(() => {
-    setTimeout(() => setSlogan(true), 3000)
-    setTimeout(() => setPhone(true), 7000)
-  }, [])
-
   return (
     <Container>
       <BackImage />
-      <Curtain />
+      <Curtain onReveal={setSlogan} />
       <Wrapper>
-        {slogan && <PositionedSlogan />}
+        {slogan && <PositionedSlogan onShift={setPhone} />}
         {phone && <PositionedPhone />}
       </Wrapper>
     </Container>

@@ -38,7 +38,7 @@ const Progress = styled.div`
   z-index: 10003;
 `
 
-const Curtain = () => {
+const Curtain = ({ onReveal }) => {
   const $progress = useRef(null)
   const $upper = useRef(null)
   const $lower = useRef(null)
@@ -64,21 +64,29 @@ const Curtain = () => {
         translateY: function(el, i) {
           return i === 0 ? "-100%" : "100%"
         },
-        easing: "easeInQuad"
+        easing: "easeInQuad",
+        endDelay: 1000,
+        complete: () => onReveal(true)
       })
-      .add({
-        targets: $curtain.current,
-        backgroundColor: "#152632",
-        easing: "linear",
-        duration: 300,
-        delay: 200,
-        endDelay: 3000
-      })
-      .add({
-        targets: $curtain.current,
-        opacity: 0,
-        duration: 2000
-      })
+      .add(
+        {
+          targets: $curtain.current,
+          backgroundColor: "#152632",
+          easing: "linear",
+          delay: 1000,
+          duration: 300,
+          endDelay: 3000
+        },
+        "-=1500"
+      )
+      .add(
+        {
+          targets: $curtain.current,
+          opacity: 0,
+          duration: 2000
+        },
+        "+=1100"
+      )
   }, [])
 
   return (
