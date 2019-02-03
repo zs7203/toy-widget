@@ -66,7 +66,7 @@ const Curtain = ({ onReveal }) => {
         },
         easing: "easeInQuad",
         endDelay: 1000,
-        complete: () => onReveal(true)
+        complete: () => onReveal && onReveal(true)
       })
       .add(
         {

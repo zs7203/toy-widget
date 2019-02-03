@@ -25,7 +25,6 @@ const Background = createGlobalStyle`
 `
 
 storiesOf("Meizu", module)
-  .add("Background Image", () => <PhoneDemo />)
   .addDecorator(story => (
     <Centered
       style={{

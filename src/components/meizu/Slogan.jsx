@@ -164,7 +164,9 @@ const Action = () => {
   return (
     <ButtonGroup ref={$btns}>
       {btns.map(btn => (
-        <Button href={btn.href}>{btn.name}</Button>
+        <Button href={btn.href} key={btn.name}>
+          {btn.name}
+        </Button>
       ))}
     </ButtonGroup>
   )
@@ -223,7 +225,7 @@ const SloganPanel = ({ className, onShift }) => {
         targets: $slogan.current,
         translateX: 530,
         duration: 1000,
-        begin: () => onShift(true)
+        begin: () => onShift && onShift(true)
       })
   }, [])
   return (
